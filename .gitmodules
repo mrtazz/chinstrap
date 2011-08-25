@@ -1,3 +1,6 @@
 [submodule "ext/yajl"]
 	path = ext/yajl
 	url = https://github.com/lloyd/yajl.git
+[submodule "ext/spec"]
+	path = ext/spec
+	url = https://github.com/mustache/spec.git
