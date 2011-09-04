@@ -58,17 +58,21 @@ $(LIBDIR):
 	@mkdir -p $(LIBDIR)
 
 # tasks
-.PHONY:  clean
+.PHONY:  clean todo
 
 clean:
 	@rm -rf tests/*.o
-	@rm -rf src/*.o
+	@rm -rf source/*.o
 	@rm -rf bin
 	@rm -rf lib
 
 test: $(TEST)
 	@echo Running tests...
 	@./bin/test
+
+todo:
+	@echo >> Existing TODOs in header and source files
+	@grep -R "TODO:" include/* source/*
 
 dynamiclibrary: $(LIB)
 
