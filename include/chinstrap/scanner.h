@@ -5,7 +5,7 @@
 #define __CHINSTRAP_SCANNER_H__
 
 // includes
-#include "chinstrap_types.h"
+#include "chinstrap/types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -13,7 +13,7 @@ extern "C" {
 
 // typedefs
 
-typedef struct
+typedef struct scanner_t
 {
   // the current row of the context
   int current_row;
@@ -39,26 +39,27 @@ static int counter = 0;
  * :param template const char*: mustache template to scan
  * :return &scanner: scanner context for the template
  */
-&scanner scanner_init(const char* template);
+//scanner& scanner_init(const char* template);
+scanner scanner_init(const char* template);
 
 /**
  * get (the next) char from the template
  *
  * :return scanner_token: struct {row, col, cargo}
  */
-scanner_token get_char(*scanner);
+scanner_token get_char(scanner* s);
 /**
  * get the previous char from the last issued from the template
  *
  * :return scanner_token: struct {row, col, cargo}
  */
-scanner_token get_previous_char(*scanner);
+scanner_token get_previous_char(scanner* s);
 /**
  * get the next char from the last issued from the template
  *
  * :return scanner_token: struct {row, col, cargo}
  */
-scanner_token get_next_char(*scanner);
+scanner_token get_next_char(scanner* s);
 
 #ifdef __cplusplus
 }

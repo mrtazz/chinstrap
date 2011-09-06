@@ -5,6 +5,10 @@
 #ifndef __CHINSTRAP_TYPES_H__
 #define __CHINSTRAP_TYPES_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // scanner types
 /**
  * a scanner token determines a character and its location in the template
@@ -26,15 +30,15 @@ typedef struct scanner_token_t
  */
 enum mustache_tokens
 {
-  OPEN_TAG = 0,
-  CLOSE_TAG,
-  STRING,
-  SECTION_START,
-  SECTION_END,
-  COMMENT,
-  INV_SECTION_START,
-  LAMBDA_START,
-  DOT
+  MUSTACHE_OPEN_TAG = 0,
+  MUSTACHE_CLOSE_TAG,
+  MUSTACHE_STRING,
+  MUSTACHE_SECTION_START,
+  MUSTACHE_SECTION_END,
+  MUSTACHE_COMMENT,
+  MUSTACHE_INV_SECTION_START,
+  MUSTACHE_LAMBDA_START,
+  MUSTACHE_DOT
 };
 
 /**
@@ -58,28 +62,32 @@ typedef struct lexer_token_t
  */
 enum chinstrap_values
 {
-  NUMBER = 0,
-  STRING,
-  BOOL,
-  ARRAY,
-  MAP
+  CHINSTRAP_NUMBER = 0,
+  CHINSTRAP_STRING,
+  CHINSTRAP_BOOL,
+  CHINSTRAP_ARRAY,
+  CHINSTRAP_MAP
 };
 /**
  * the chinstrap_value (context) is a data representation inspired by JSON, it
  * can be filled with data and used to render templates.
  */
 typedef struct chinstrap_value_t chinstrap_value;
-typedef struct chinstrap_value_t
+struct chinstrap_value_t
 {
   const int type;
   union
   {
-    const char* value;
-    const double value;
-    const int value;
-    const chinstrap_value*[];
-  };
-} chinstrap_value;
+    const char* string;
+    const double number;
+    const int boolean;
+    chinstrap_value* array;
+    // TODO: we need a dict/map type here also
+  } value;
+};
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif //__CHINSTRAP_TYPES_H__

@@ -2,7 +2,7 @@
  * scanner.c - implementation of the chinstrap scanner module
  */
 
-#include "scanner.h"
+#include "chinstrap/scanner.h"
 
 /**
  * init the scanner with a mustache template
@@ -10,10 +10,10 @@
  * :param template const char*: mustache template to scan
  * :return &scanner: scanner context for the template
  */
-&scanner scanner_init(const char* template)
+scanner scanner_init(const char* template)
 {
-  scanner s = {0, 0, template, }
-
+  scanner s;
+  return s;
 }
 
 /**
@@ -21,12 +21,12 @@
  *
  * :return scanner_token: struct {row, col, cargo}
  */
-scanner_token get_char(*scanner)
+scanner_token get_char(scanner* s)
 {
   // init the return value
-  scanner_token ret = {current_row,
-                       current_col,
-                       scanner->template[scanner->pos]
+  scanner_token ret = {s->current_row,
+                       s->current_col,
+                       s->template[s->pos]
                       };
 
   return ret;
@@ -37,11 +37,11 @@ scanner_token get_char(*scanner)
  *
  * :return scanner_token: struct {row, col, cargo}
  */
-scanner_token get_previous_char(*scanner)
+scanner_token get_previous_char(scanner* s)
 {
-  scanner_token ret = {current_row - 1,
-                       current_col - 1 ,
-                       scanner->template[scanner->(pos-1)]
+  scanner_token ret = {s->current_row - 1,
+                       s->current_col - 1 ,
+                       s->template[(s->pos-1)]
                       };
 
   return ret;
@@ -51,11 +51,11 @@ scanner_token get_previous_char(*scanner)
  *
  * :return scanner_token: struct {row, col, cargo}
  */
-scanner_token get_next_char(*scanner)
+scanner_token get_next_char(scanner* s)
 {
-  scanner_token ret = {current_row + 1,
-                       current_col + 1 ,
-                       scanner->template[scanner->(pos+1)]
+  scanner_token ret = {s->current_row + 1,
+                       s->current_col + 1 ,
+                       s->template[(s->pos+1)]
                       };
 
   return ret;
