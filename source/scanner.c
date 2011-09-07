@@ -10,9 +10,9 @@
  * :param template const char*: mustache template to scan
  * :return &scanner: scanner context for the template
  */
-scanner scanner_init(const char* template)
+scanner scanner_init(const char* thetemplate, int length)
 {
-  scanner s;
+  scanner s = {0,0,"",0,0};
   return s;
 }
 
@@ -26,7 +26,7 @@ scanner_token get_char(scanner* s)
   // init the return value
   scanner_token ret = {s->current_row,
                        s->current_col,
-                       s->template[s->pos]
+                       s->thetemplate[s->pos]
                       };
 
   return ret;
@@ -41,7 +41,7 @@ scanner_token get_previous_char(scanner* s)
 {
   scanner_token ret = {s->current_row - 1,
                        s->current_col - 1 ,
-                       s->template[(s->pos-1)]
+                       s->thetemplate[(s->pos-1)]
                       };
 
   return ret;
@@ -55,7 +55,7 @@ scanner_token get_next_char(scanner* s)
 {
   scanner_token ret = {s->current_row + 1,
                        s->current_col + 1 ,
-                       s->template[(s->pos+1)]
+                       s->thetemplate[(s->pos+1)]
                       };
 
   return ret;

@@ -20,9 +20,9 @@ typedef struct scanner_t
   // the current column of the context
   int current_col;
   // mustache template as const char*
-  const char* template;
+  char* thetemplate;
   // length of the template string
-  const int template_length;
+  int template_length;
   // current position in the string
   int pos;
 
@@ -39,8 +39,7 @@ static int counter = 0;
  * :param template const char*: mustache template to scan
  * :return &scanner: scanner context for the template
  */
-//scanner& scanner_init(const char* template);
-scanner scanner_init(const char* template);
+scanner scanner_init(const char* thetemplate, int length);
 
 /**
  * get (the next) char from the template
