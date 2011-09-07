@@ -15,20 +15,20 @@ LIB = $(LIBDIR)/$(LIBNAME)
 STATIC = $(LIBDIR)/chinstrap.a
 
 # set library and include paths
-INCLUDE =  -I. -I/usr/local/include
-TESTLIBS = -lcheck -lyajl
+INCLUDE =  -Iinclude -I/usr/local/include
+TESTLIBS = -lcunit#-lyajl
 LIBS =
 
 # set compiler and linker flags
-CCFLAGS = -fPIC -O3 -W -Wall
+CCFLAGS = -fPIC -O3 -W -Wall -std=c99
 LDFLAGS = -W -Wall -L/usr/local/lib
 
 # source files
-SRCS =  src/scanner.c src/lexer.c src/parser.c
+SRCS =  $(wildcard source/*.c)
 
 # test source files
 TESTSRCS = $(SRCS)
-TESTSRCS += $(wildcard tests/test_chinstrap.c)
+TESTSRCS += $(wildcard tests/test_chinstrap*.c)
 
 # dependencies
 # object files
@@ -67,7 +67,6 @@ clean:
 	@rm -rf lib
 
 test: $(TEST)
-	@echo Running tests...
 	@./bin/test
 
 todo:
