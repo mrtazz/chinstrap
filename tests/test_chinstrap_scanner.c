@@ -1,37 +1,40 @@
-#include "CUnit/Basic.h"
-#include "chinstrap/scanner.h"
+#include <check.h>
 #include <string.h>
+#include "chinstrap/scanner.h"
 
-
-static scanner s;
-static scanner s2;
-
-int init_scanner_suite(void)
+START_TEST (test_scanner_init_with_length)
 {
-  s = scanner_init("foobar", 6);
-  s2 = scanner_init("foobar", -1);
-  return 0;
+  scanner s = scanner_init("foobar", 6);
+  fail_unless(s.current_row == 0);
+  fail_unless(s.current_col == 0);
+  fail_unless(strcmp(s.thetemplate, "foobar"));
+  fail_unless(s.template_length == 6);
+  fail_unless(s.pos == 0);
 }
+END_TEST
 
-int clean_scanner_suite(void)
+
+START_TEST (test_scanner_init_without_length)
 {
-  return 0;
+  scanner s = scanner_init("foobar", -1);
+  fail_unless(s.current_row == 0);
+  fail_unless(s.current_col == 0);
+  fail_unless(strcmp(s.thetemplate, "foobar"));
+  fail_unless(s.template_length == 6);
+  fail_unless(s.pos == 0);
 }
+END_TEST
 
-void test_scanner_init_with_length(void)
+Suite *
+scanner_suite (void)
 {
-  CU_ASSERT(s.current_row == 0);
-  CU_ASSERT(s.current_col == 0);
-  CU_ASSERT(strcmp(s.thetemplate, "foobar"));
-  CU_ASSERT(s.template_length == 6);
-  CU_ASSERT(s.pos == 0);
-}
+  Suite *s = suite_create ("Scanner");
 
-void test_scanner_init_without_length(void)
-{
-  CU_ASSERT(s.current_row == 0);
-  CU_ASSERT(s.current_col == 0);
-  CU_ASSERT(strcmp(s.thetemplate, "foobar"));
-  CU_ASSERT(s.template_length == 6);
-  CU_ASSERT(s.pos == 0);
+  /* Core test case */
+  TCase *tc_core = tcase_create ("Core");
+  tcase_add_test (tc_core, test_scanner_init_with_length);
+  tcase_add_test (tc_core, test_scanner_init_without_length);
+  suite_add_tcase (s, tc_core);
+
+  return s;
 }

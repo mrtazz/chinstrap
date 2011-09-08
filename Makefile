@@ -16,7 +16,7 @@ STATIC = $(LIBDIR)/chinstrap.a
 
 # set library and include paths
 INCLUDE =  -Iinclude -I/usr/local/include
-TESTLIBS = -lcunit#-lyajl
+TESTLIBS = -lcheck#-lyajl
 LIBS =
 
 # set compiler and linker flags
