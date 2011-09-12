@@ -4,6 +4,3 @@
 [submodule "ext/spec"]
 	path = ext/spec
 	url = https://github.com/mustache/spec.git
-[submodule "ext/seatest"]
-	path = ext/seatest
-	url = https://github.com/mrtazz/seatest.git
