@@ -28,9 +28,6 @@ typedef struct scanner_t
 
 } scanner;
 
-// module variables
-static int counter = 0;
-
 // API functions
 
 /**
