@@ -32,31 +32,3 @@ scanner_token get_char(scanner* s)
   return ret;
 }
 
-/**
- * get the previous char from the last issued from the template
- *
- * :return scanner_token: struct {row, col, cargo}
- */
-scanner_token get_previous_char(scanner* s)
-{
-  scanner_token ret = {s->current_row - 1,
-                       s->current_col - 1 ,
-                       s->thetemplate[(s->pos-1)]
-                      };
-
-  return ret;
-}
-/**
- * get the next char from the last issued from the template
- *
- * :return scanner_token: struct {row, col, cargo}
- */
-scanner_token get_next_char(scanner* s)
-{
-  scanner_token ret = {s->current_row + 1,
-                       s->current_col + 1 ,
-                       s->thetemplate[(s->pos+1)]
-                      };
-
-  return ret;
-}

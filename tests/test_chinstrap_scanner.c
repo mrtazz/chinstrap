@@ -40,22 +40,6 @@ START_TEST (test_scanner_get_char)
 }
 END_TEST
 
-START_TEST (test_scanner_get_previous_char)
-{
-  scanner s = scanner_init("foobar", 6);
-  get_char(&s);
-  scanner_token t = get_previous_char(&s);
-  fail_unless(s.current_row == 0);
-  fail_unless(s.current_col == 2);
-  fail_unless(strcmp(s.thetemplate, "foobar"));
-  fail_unless(s.template_length == 6);
-  fail_unless(s.pos == 2);
-  fail_unless(t.row == 0);
-  fail_unless(t.col == 1);
-  fail_unless(strcmp(t.cargo, "f"));
-}
-END_TEST
-
 Suite *
 scanner_suite (void)
 {

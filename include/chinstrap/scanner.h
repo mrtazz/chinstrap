@@ -44,18 +44,6 @@ scanner scanner_init(const char* thetemplate, int length);
  * :return scanner_token: struct {row, col, cargo}
  */
 scanner_token get_char(scanner* s);
-/**
- * get the previous char from the last issued from the template
- *
- * :return scanner_token: struct {row, col, cargo}
- */
-scanner_token get_previous_char(scanner* s);
-/**
- * get the next char from the last issued from the template
- *
- * :return scanner_token: struct {row, col, cargo}
- */
-scanner_token get_next_char(scanner* s);
 
 #ifdef __cplusplus
 }
