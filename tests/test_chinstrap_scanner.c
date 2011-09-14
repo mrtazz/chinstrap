@@ -40,6 +40,24 @@ START_TEST (test_scanner_get_char)
 }
 END_TEST
 
+START_TEST (test_scanner_get_char_with_newline)
+{
+  scanner s = scanner_init("foo\nbar", 7);
+  get_char(&s);
+  get_char(&s);
+  get_char(&s);
+  scanner_token t = get_char(&s);
+  fail_unless(s.current_row == 1);
+  fail_unless(s.current_col == 1);
+  fail_unless(!strcmp(s.thetemplate, "foobar"));
+  fail_unless(s.template_length == 7);
+  fail_unless(s.pos == 4);
+  fail_unless(t.row == 1);
+  fail_unless(t.col == 1);
+  fail_unless(t.cargo == 'b');
+}
+
+END_TEST
 Suite *
 scanner_suite (void)
 {
@@ -50,6 +68,7 @@ scanner_suite (void)
   tcase_add_test (tc_core, test_scanner_init_with_length);
   tcase_add_test (tc_core, test_scanner_init_without_length);
   tcase_add_test (tc_core, test_scanner_get_char);
+  tcase_add_test (tc_core, test_scanner_get_char_with_newline);
   suite_add_tcase (s, tc_core);
 
   return s;
