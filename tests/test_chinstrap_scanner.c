@@ -7,7 +7,7 @@ START_TEST (test_scanner_init_with_length)
   scanner s = scanner_init("foobar", 6);
   fail_unless(s.current_row == 0);
   fail_unless(s.current_col == 0);
-  fail_unless(strcmp(s.thetemplate, "foobar"));
+  fail_unless(!strcmp(s.thetemplate, "foobar"));
   fail_unless(s.template_length == 6);
   fail_unless(s.pos == 0);
 }
@@ -19,7 +19,7 @@ START_TEST (test_scanner_init_without_length)
   scanner s = scanner_init("foobar", -1);
   fail_unless(s.current_row == 0);
   fail_unless(s.current_col == 0);
-  fail_unless(strcmp(s.thetemplate, "foobar"));
+  fail_unless(!strcmp(s.thetemplate, "foobar"));
   fail_unless(s.template_length == 6);
   fail_unless(s.pos == 0);
 }
@@ -30,13 +30,13 @@ START_TEST (test_scanner_get_char)
   scanner s = scanner_init("foobar", 6);
   scanner_token t = get_char(&s);
   fail_unless(s.current_row == 0);
-  fail_unless(s.current_col == 2);
-  fail_unless(strcmp(s.thetemplate, "foobar"));
+  fail_unless(s.current_col == 1);
+  fail_unless(!strcmp(s.thetemplate, "foobar"));
   fail_unless(s.template_length == 6);
-  fail_unless(s.pos == 2);
+  fail_unless(s.pos == 1);
   fail_unless(t.row == 0);
   fail_unless(t.col == 1);
-  fail_unless(strcmp(t.cargo, "f"));
+  fail_unless(t.cargo == 'f');
 }
 END_TEST
 
