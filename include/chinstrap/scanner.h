@@ -20,7 +20,7 @@ typedef struct scanner_t
   // the current column of the context
   int current_col;
   // mustache template as const char*
-  char* thetemplate;
+  const char* thetemplate;
   // length of the template string
   int template_length;
   // current position in the string
