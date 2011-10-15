@@ -27,12 +27,20 @@ scanner scanner_init(const char* thetemplate, int length)
 scanner_token get_char(scanner* s)
 {
   // init the return value
+  char c;
+  c = s->thetemplate[s->pos];
+  // check if there is a new row
+  if (c == '\n')
+  {
+    // increase row number
+    ++(s->current_row);
+    // reset column number
+    s->current_col = 0;
+    ++(s->pos);
+    c = s->thetemplate[s->pos];
+  }
   ++s->current_col;
-  const char c = s->thetemplate[s->pos];
-  scanner_token ret = {s->current_row,
-                       s->current_col,
-                       c
-                      };
+  scanner_token ret = {s->current_row, s->current_col, c };
   ++s->pos;
 
   return ret;
