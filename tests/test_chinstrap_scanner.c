@@ -49,9 +49,9 @@ START_TEST (test_scanner_get_char_with_newline)
   scanner_token t = get_char(&s);
   fail_unless(s.current_row == 1);
   fail_unless(s.current_col == 1);
-  fail_unless(!strcmp(s.thetemplate, "foobar"));
+  fail_unless(!strcmp(s.thetemplate, "foo\nbar"));
   fail_unless(s.template_length == 7);
-  fail_unless(s.pos == 4);
+  fail_unless(s.pos == 5);
   fail_unless(t.row == 1);
   fail_unless(t.col == 1);
   fail_unless(t.cargo == 'b');
