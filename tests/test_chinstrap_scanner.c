@@ -56,6 +56,20 @@ START_TEST (test_scanner_get_char_with_newline)
   fail_unless(t.col == 1);
   fail_unless(t.cargo == 'b');
 }
+END_TEST
+
+#include<stdio.h>
+START_TEST (test_scanner_reach_end_of_template)
+{
+  const char foo[6] = { 'f', 'o', 'o', '\0', 7, 7};
+  scanner s = scanner_init(foo, 3);
+  get_char(&s);
+  get_char(&s);
+  get_char(&s);
+  get_char(&s);
+  scanner_token t = get_char(&s);
+  fail_unless(t.cargo == '\0');
+}
 
 END_TEST
 Suite *
@@ -69,6 +83,7 @@ scanner_suite (void)
   tcase_add_test (tc_core, test_scanner_init_without_length);
   tcase_add_test (tc_core, test_scanner_get_char);
   tcase_add_test (tc_core, test_scanner_get_char_with_newline);
+  tcase_add_test (tc_core, test_scanner_reach_end_of_template);
   suite_add_tcase (s, tc_core);
 
   return s;
