@@ -75,7 +75,10 @@ enum chinstrap_values
 typedef struct chinstrap_value_t chinstrap_value;
 struct chinstrap_value_t
 {
+  // mustache value type
   const int type;
+  // key field used for map values
+  const char* key;
   union
   {
     const char* string;
