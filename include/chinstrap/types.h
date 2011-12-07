@@ -28,7 +28,7 @@ typedef struct scanner_token_t
 /**
  * different types of mustache tokens stored in an enum for easy lookup
  */
-enum mustache_tokens
+typedef enum
 {
   MUSTACHE_OPEN_TAG = 0,
   MUSTACHE_CLOSE_TAG,
@@ -39,7 +39,7 @@ enum mustache_tokens
   MUSTACHE_INV_SECTION_START,
   MUSTACHE_LAMBDA_START,
   MUSTACHE_DOT
-};
+} mustache_tokens;
 
 /**
  * the lexer token struct defines an int type token and if necessary the
@@ -48,7 +48,7 @@ enum mustache_tokens
 typedef struct lexer_token_t
 {
   // type of mustache lexer token
-  int type;
+  mustache_tokens type;
   // content mostly used for mustache strings
   const char* content;
 } lexer_token;
@@ -60,14 +60,14 @@ typedef struct lexer_token_t
 /**
  * The possible different types for values passed as context
  */
-enum chinstrap_values
+typedef enum
 {
   CHINSTRAP_NUMBER = 0,
   CHINSTRAP_STRING,
   CHINSTRAP_BOOL,
   CHINSTRAP_ARRAY,
   CHINSTRAP_MAP
-};
+} chinstrap_values;
 /**
  * the chinstrap_value (context) is a data representation inspired by JSON, it
  * can be filled with data and used to render templates.
@@ -76,7 +76,7 @@ typedef struct chinstrap_value_t chinstrap_value;
 struct chinstrap_value_t
 {
   // mustache value type
-  const int type;
+  const chinstrap_values type;
   // key field used for map values
   const char* key;
   union
