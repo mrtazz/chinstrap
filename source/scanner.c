@@ -38,10 +38,16 @@ scanner_token get_char(scanner* s)
     s->current_col = 0;
     ++(s->pos);
     c = s->thetemplate[s->pos];
-  }
-  ++s->current_col;
-  scanner_token ret = {s->current_row, s->current_col, c };
-  ++s->pos;
+  } /* if */
+
+  /* Verify that we stop when the string is terminated */
+  if (c != '\0')
+  {
+    ++s->current_col;
+    ++s->pos;
+  } /* if */
+
+  scanner_token ret = { s->current_row, s->current_col, c };
 
   return ret;
 }
