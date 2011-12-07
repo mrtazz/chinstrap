@@ -14,7 +14,7 @@
 scanner scanner_init(const char* thetemplate, int length)
 {
   int len;
-  len = (length < 0) ? strlen(thetemplate) : length;
+  len = (length < 0) ? (int)strlen(thetemplate) : length;
   scanner s = {0, 0, thetemplate, len, 0};
   return s;
 }
