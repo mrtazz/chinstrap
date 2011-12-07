@@ -24,35 +24,6 @@ typedef struct scanner_token_t
   const char cargo;
 } scanner_token;
 
-// lexer types
-/**
- * different types of mustache tokens stored in an enum for easy lookup
- */
-typedef enum
-{
-  MUSTACHE_OPEN_TAG = 0,
-  MUSTACHE_CLOSE_TAG,
-  MUSTACHE_STRING,
-  MUSTACHE_SECTION_START,
-  MUSTACHE_SECTION_END,
-  MUSTACHE_COMMENT,
-  MUSTACHE_INV_SECTION_START,
-  MUSTACHE_LAMBDA_START,
-  MUSTACHE_DOT
-} mustache_tokens;
-
-/**
- * the lexer token struct defines an int type token and if necessary the
- * content to be passed to the parser.
- */
-typedef struct lexer_token_t
-{
-  // type of mustache lexer token
-  mustache_tokens type;
-  // content mostly used for mustache strings
-  const char* content;
-} lexer_token;
-
 // parser types
 // TODO: define parse tree here
 
